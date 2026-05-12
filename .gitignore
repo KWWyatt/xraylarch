@@ -1,39 +1,52 @@
+# Cursor / editor
+.cursor/
+
+# Python
+__pycache__/
 *.pyc
 *.pyo
-*~
-*#
-*.bak
-*.aux
-*.pdf
-larch/_version.py
-conda_constructor/*.sh
-conda_constructor/*.exe
-conda_constructor/*.pkg
-__pycache__
-.deps
-doc/_build
-MANIFEST
-build
-dist
-dylibs/*/*.o
-dylibs/*/*.dll
-dylibs/*/*.so
-dylibs/*/*.dylib
-dylibs/*/Mk.install
-dylibs/*/Mk.config
-sandbox/
-tests/.cover
-play/
-AMAP/
-*.h5
-*.mca
-*credentials*
+*.pyd
+*.egg-info/
+build/
+dist/
+
+# Environments
+.venv/
+venv/
+env/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
+# Test/cache
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# OS/cloud artifacts
 .DS_Store
 Thumbs.db
-*.egg-info
-*.ipynb_checkpoints/
-*iframe_figures
-.vscode/
-.empty/
-.eggs/
-.coverage
+~$*
+
+# Local data and generated outputs
+data/
+ft_outputs/
+outputs/
+results/
+scratch/
+temp/
+tmp/
+
+# Generated figures/tables/text exports
+*.png
+*.jpg
+*.jpeg
+*.svg
+*.pdf
+*.csv
+selected_feff_paths.txt
+selected_pb_feff_paths.txt
