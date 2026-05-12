@@ -34,6 +34,7 @@ from .athena_project import (is_athena_project, read_athena, AthenaProject,
 
 from .xafs_beamlines import guess_beamline
 from .csvfiles import groups2csv, read_csv
+from .xyz_frames import extract_xyz_frames
 from .export_modelresult import export_modelresult
 from .mergegroups import merge_groups
 
@@ -93,7 +94,8 @@ __exports__ = dict(increment_filename=increment_filename,
                    specfile=open_specfile,
                    read_fdmnes=read_fdmnes,
                    open_xas_source=open_xas_source,
-                   read_xas_source=read_xas_source
+                   read_xas_source=read_xas_source,
+                   extract_xyz_frames=extract_xyz_frames
                    )
 
 _larch_builtins = {'_io':__exports__}

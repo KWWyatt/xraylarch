@@ -36,7 +36,8 @@ from .fitting import Parameter, isParameter, param_value, ParameterGroup
 
 from .inputText import InputText
 from .interpreter import Interpreter
-
+from .XASmu2r import XASmu2r
+from .XAFSfit import XAFSfit
 
 from . import larchlib
 from . import utils

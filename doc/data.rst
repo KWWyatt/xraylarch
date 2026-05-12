@@ -58,7 +58,21 @@ read these files in, you also need to know and tell the program how to use those
 
 .. autofunction:: write_group
 
+Extracting Frames From XYZ Trajectories
+=======================================
 
+.. autofunction:: extract_xyz_frames
+
+Command-line usage::
+
+    python -m larch.io.xyz_frames trajectory.xyz output_frames --frames 0 10 25
+
+The command above creates an ``output_frames`` directory (if needed) and
+saves frames 0, 10, and 25 from ``trajectory.xyz`` into individual XYZ
+files named ``frame_000.xyz``, ``frame_010.xyz``, and ``frame_025.xyz``.
+Use ``--one-based`` when your frame numbering starts at 1, and
+``--frames-file`` to supply a text file with an arbitrary list of frame
+numbers.
 
 
 .. _read_xdi_function:

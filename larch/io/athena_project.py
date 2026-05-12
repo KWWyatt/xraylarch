@@ -837,13 +837,32 @@ class AthenaProject(object):
 
             if is_xmu and (do_preedge or do_bkg):
                 pars = clean_bkg_params(this.athena_params.bkg)
+                # Fallbacks: Athena may store e0 in different locations
+                if pars.e0 is None or pars.e0 < 0:
+                    top_e0 = getattr(this.athena_params, 'e0', None)
+                    if top_e0 is not None and float(top_e0) > 0:
+                        pars.e0 = float(top_e0)
+                if pars.e0 is None or pars.e0 < 0:
+                    # bkg_formere0: "saved value of e0 when changing its value" (Demeter docs)
+                    former = getattr(this.athena_params.bkg, 'formere0', None)
+                    if former is not None and float(former) > 0:
+                        pars.e0 = float(former)
+                if pars.e0 is None or pars.e0 < 0:
+                    # e0 not found in project file; pre_edge will auto-detect from derivative
+                    e0_candidates = {'e0': getattr(this.athena_params.bkg, 'e0', None),
+                                     'formere0': getattr(this.athena_params.bkg, 'formere0', None),
+                                     'athena_params.e0': getattr(this.athena_params, 'e0', None)}
+                    print("  Note: No valid e0 in project file for '%s'. Checked: %s. "
+                          "E0 will be auto-detected from data derivative." % (oname, e0_candidates))
                 this.energy_shift = getattr(this.athena_params.bkg, 'eshift', 0.)
+                e0_from_file = (pars.e0 is not None and pars.e0 > 0)
                 pre_edge(this,  e0=float(pars.e0),
                          pre1=float(pars.pre1), pre2=float(pars.pre2),
                          norm1=float(pars.nor1), norm2=float(pars.nor2),
                          nnorm=float(pars.nnorm),
                          nvict=float(pars.nvict),
                          make_flat=bool(pars.flatten))
+                this._e0_from_athena_file = e0_from_file
                 if do_bkg and hasattr(pars, 'rbkg'):
                     autobk(this, e0=float(pars.e0), rbkg=float(pars.rbkg),
                            kmin=float(pars.spl1), kmax=float(pars.spl2),
